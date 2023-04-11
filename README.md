@@ -1,6 +1,6 @@
-# Flowchart app
+# tab_graph app
 
-Visualize linked records as a directed graph, such as a flowchart, decision tree, or user flow diagram. Export your
+Visualize linked records as graph, such as a flowchart, decision tree, or user flow diagram. Export your
 graph to SVG for further editing or PNG for sharing.
 
 ## How to remix this app

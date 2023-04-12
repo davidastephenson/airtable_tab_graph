@@ -1,4 +1,4 @@
-import {loadCSSFromString} from '@airtable/blocks/ui';
+import { loadCSSFromString } from '@airtable/blocks/ui';
 
 const cssString = `
     span.prompt {
@@ -18,7 +18,7 @@ const cssString = `
 `;
 
 function loadCSS() {
-    loadCSSFromString(cssString);
+	loadCSSFromString(cssString);
 }
 
 export default loadCSS;

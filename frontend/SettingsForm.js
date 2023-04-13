@@ -1,23 +1,7 @@
 import React from 'react';
-import {
-	Box,
-	Button,
-	FieldPickerSynced,
-	FormField,
-	Heading,
-	Label,
-	Link,
-	InputSynced,
-	SelectButtonsSynced,
-	SelectSynced,
-	TablePickerSynced,
-	Text,
-	SwitchSynced,
-	ViewPickerSynced,
-} from '@airtable/blocks/ui';
-import { FieldType } from '@airtable/blocks/models';
+import { Box, Button, FieldPickerSynced, FormField, Heading, Label, Link, InputSynced, SelectButtonsSynced, SelectSynced, TablePickerSynced, Text, SwitchSynced, ViewPickerSynced } from '@airtable/blocks/ui';
 import { ExportType } from './index';
-import { allowedFieldTypes, ConfigKeys, LinkStyle, ChartOrientation, RecordShape, ShapeAs, ColourBy } from './settings';
+import { NodeShapeAllowedFieldTypes, ClusterByAllowedFieldTypes, LinkFieldTypes, ConfigKeys, LinkStyle, ChartOrientation, RecordShape, ShapeAs, ColourBy } from './settings';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { globalConfig } from '@airtable/blocks';
@@ -162,7 +146,7 @@ function SettingsForm({ setIsSettingsVisible, settingsValidationResult, onExport
 										<FieldPickerSynced
 											table={settings.table1}
 											globalConfigKey={ConfigKeys.TABLE1_SHAPE_FIELD_ID}
-											allowedTypes={allowedFieldTypes}
+											allowedTypes={NodeShapeAllowedFieldTypes}
 										/>
 									</FormField>}
 								<FormField label="Table1 Shape Rounded">
@@ -214,7 +198,7 @@ function SettingsForm({ setIsSettingsVisible, settingsValidationResult, onExport
 										table={settings.table1}
 										globalConfigKey={ConfigKeys.TABLE1_EMBED_FIELDLINK}
 										shouldAllowPickingNone={true}
-										allowedTypes={[FieldType.MULTIPLE_RECORD_LINKS]}
+										allowedTypes={LinkFieldTypes}
 									/>
 								</FormField>
 								{settings.embedFieldLink1 && <FormField label="Embed linked record field view">
@@ -231,7 +215,7 @@ function SettingsForm({ setIsSettingsVisible, settingsValidationResult, onExport
 										table={settings.table1}
 										globalConfigKey={ConfigKeys.TABLE1_CLUSTER_BY_FIELD}
 										shouldAllowPickingNone={true}
-										allowedTypes={allowedFieldTypes}
+										allowedTypes={ClusterByAllowedFieldTypes}
 									/>
 								</FormField>
 							</Box>
@@ -291,7 +275,7 @@ function SettingsForm({ setIsSettingsVisible, settingsValidationResult, onExport
 									<FieldPickerSynced
 										table={settings.table2}
 										globalConfigKey={ConfigKeys.TABLE2_SHAPE_FIELD_ID}
-										allowedTypes={allowedFieldTypes}
+										allowedTypes={NodeShapeAllowedFieldTypes}
 									/>
 								</FormField>}
 							<FormField label="Table2 Shape Rounded">
@@ -343,7 +327,7 @@ function SettingsForm({ setIsSettingsVisible, settingsValidationResult, onExport
 								<FieldPickerSynced
 									table={settings.table2}
 									globalConfigKey={ConfigKeys.TABLE2_EMBED_FIELDLINK}
-									allowedTypes={[FieldType.MULTIPLE_RECORD_LINKS]}
+									allowedTypes={LinkFieldTypes}
 								/>
 							</FormField>
 							{settings.embedFieldLink2 && <FormField label="Embed linked record field view">
@@ -360,7 +344,7 @@ function SettingsForm({ setIsSettingsVisible, settingsValidationResult, onExport
 									table={settings.table2}
 									globalConfigKey={ConfigKeys.TABLE2_CLUSTER_BY_FIELD}
 									shouldAllowPickingNone={true}
-									allowedTypes={allowedFieldTypes}
+									allowedTypes={ClusterByAllowedFieldTypes}
 								/>
 							</FormField>
 						</Box>
@@ -419,7 +403,7 @@ function SettingsForm({ setIsSettingsVisible, settingsValidationResult, onExport
 									<FieldPickerSynced
 										table={settings.table3}
 										globalConfigKey={ConfigKeys.TABLE3_SHAPE_FIELD_ID}
-										allowedTypes={allowedFieldTypes}
+										allowedTypes={NodeShapeAllowedFieldTypes}
 									/>
 								</FormField>}
 							<FormField label="Table 3 Shape Rounded">
@@ -471,7 +455,7 @@ function SettingsForm({ setIsSettingsVisible, settingsValidationResult, onExport
 								<FieldPickerSynced
 									table={settings.table3}
 									globalConfigKey={ConfigKeys.TABLE3_EMBED_FIELDLINK}
-									allowedTypes={[FieldType.MULTIPLE_RECORD_LINKS]}
+									allowedTypes={LinkFieldTypes}
 								/>
 							</FormField>
 							{settings.embedFieldLink3 && <FormField label="Embed linked record field view">
@@ -488,7 +472,7 @@ function SettingsForm({ setIsSettingsVisible, settingsValidationResult, onExport
 									table={settings.table3}
 									globalConfigKey={ConfigKeys.TABLE3_CLUSTER_BY_FIELD}
 									shouldAllowPickingNone={true}
-									allowedTypes={allowedFieldTypes}
+									allowedTypes={ClusterByAllowedFieldTypes}
 								/>
 							</FormField>
 						</Box>

@@ -223,13 +223,6 @@ function getSettings(rawSettings, base, globalConfig) {
 	};
 }
 
-function AorB(a, b) {
-	if (a == undefined || a == null || a == "") {
-		return b;
-	}
-	return a;
-}
-
 /**
  * Wraps the settings with validation information
  * @param {object} settings - The object returned by getSettings
@@ -262,5 +255,9 @@ export function useSettings(base) {
 	return getSettingsValidationResult(settings);
 }
 
-export const allowedFieldTypes = [FieldType.FORMULA, FieldType.SINGLE_LINE_TEXT, FieldType.SINGLE_SELECT];
+export const NodeShapeAllowedFieldTypes = [FieldType.FORMULA, FieldType.SINGLE_LINE_TEXT, FieldType.SINGLE_SELECT];
+
+export const LinkFieldTypes = [FieldType.MULTIPLE_RECORD_LINKS];
+
+export const ClusterByAllowedFieldTypes = [FieldType.MULTIPLE_LOOKUP_VALUES, FieldType.CURRENCY, FieldType.EMAIL, FieldType.LAST_MODIFIED_BY, FieldType.MULTIPLE_RECORD_LINKS, FieldType.NUMBER,FieldType.RATING, FieldType.ROLLUP,  FieldType.CREATED_BY,FieldType.FORMULA, FieldType.SINGLE_LINE_TEXT, FieldType.SINGLE_SELECT];
 

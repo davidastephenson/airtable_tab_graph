@@ -2,13 +2,13 @@
 import { colorUtils } from '@airtable/blocks/ui';
 import { LinkStyle, ChartOrientation, ShapeAs, ColourBy } from './settings';
 
-const DEBUG_OUTPUT = false; // Set to true to log layout source string to console
+const DEBUG_OUTPUT = true; // Set to true to log layout source string to console
 
 export function RenderGraphViz(settings, tableMetaDatas) {
 	const { chartOrientation, linkStyle } = settings;
 
 	if (tableMetaDatas == null || Object.keys(tableMetaDatas) == 0) {
-		return null;//"digraph { }";
+		return null;
 	}
 
 	let source = 'digraph {\n\t'
@@ -16,7 +16,7 @@ export function RenderGraphViz(settings, tableMetaDatas) {
 	source += 'pad=0.25\n\t';
 	source += 'nodesep=0.75\n\t';
 
-	if (chartOrientation === ChartOrientation.HORIZONTAL) {
+	if (chartOrientation != ChartOrientation.HORIZONTAL) {
 		source += 'rankdir=LR\n\t';
 	}
 
@@ -134,7 +134,8 @@ function createNodesFromAView(tableSettings, displayedRecords, nodeMap, edges, q
 }
 
 function createANodeFromAView(tableSettings, displayedRecords, nodeMap, edges, record, tableMetaDataA, queryResultB, tableMetaDataB, includedTables, recordColor) {
-	const clusterName = tableSettings.tableXClusterByFieldId ? record.getCellValueAsString(tableSettings.tableXClusterByFieldId) : "alltheothers";
+	const clusterName = tableSettings.tableXClusterByFieldId ? escapeGraphviz(record.getCellValueAsString(tableSettings.tableXClusterByFieldId)) : "alltheothers";
+
 	if (nodeMap.hasOwnProperty(clusterName) == false) {
 		nodeMap[clusterName] = [];
 	}
@@ -209,8 +210,13 @@ function createANodeFromAView(tableSettings, displayedRecords, nodeMap, edges, r
 
 	if (queryResultB && tableMetaDataB) {
 		let toEmbedRecords = queryResultB.records.filter(aRecord => {
-			return (aRecord.getCellValue(tableSettings.embedReverseFieldId).map(r => { return r.id }).includes(record.id));
+			const cv = aRecord.getCellValue(tableSettings.embedReverseFieldId)
+			if(cv != null){
+				return (cv.map(r => { return r.id }).includes(record.id));
+			}
+			return false;
 		});
+		console.log("toEmbedRecords=" + toEmbedRecords);
 
 		for (let embedRecord of toEmbedRecords) {
 			let rowValueAsString = embedRecord.name;
@@ -220,8 +226,10 @@ function createANodeFromAView(tableSettings, displayedRecords, nodeMap, edges, r
 			}
 			const cleanRowValueAsString = escapeHtml(rowValueAsString);
 
-			rowsInLabel++;
-			nodeDetails += `<tr> <td align="left" >${cleanRowValueAsString}</td> </tr>`;
+			if (tableSettings.tableXIncludeFields) {
+				rowsInLabel++;
+				nodeDetails += `<tr> <td align="left" >${cleanRowValueAsString}</td> </tr>`;
+			}			
 
 			for (let fieldMetaData of Object.values(tableMetaDataB)) {
 				if (fieldMetaData.fieldType == "multipleRecordLinks" && fieldMetaData.embedField == false) {
@@ -295,6 +303,10 @@ function extractDisplayedRecordIds(arrayOfQuery) {
 		}
 	}
 	return recordIds;
+}
+
+const escapeGraphviz = (unsafe) => {
+	return unsafe.replaceAll(' ', '_').replaceAll('-', '_').replaceAll('<', '_lt_').replaceAll('>', '_gt_').replaceAll('"', '_quot_').replaceAll("'", '_');
 }
 
 const escapeHtml = (unsafe) => {

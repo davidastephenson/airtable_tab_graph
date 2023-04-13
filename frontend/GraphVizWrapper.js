@@ -22,7 +22,7 @@ export default ({ dot, subtractWidth, svgRef, children }) => {
 
 	return (
 		<div>
-			<TransformWrapper>
+			<TransformWrapper maxScale={32}>
 				<TransformComponent>
 					<SVG
 						innerRef={svgRef}

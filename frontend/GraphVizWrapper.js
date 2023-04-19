@@ -13,16 +13,23 @@ export default ({ dot, subtractWidth, svgRef, children }) => {
 
 	useEffect(() => {
 		async function getSvg() {
-			const graphviz = await Graphviz.load();
-			const svg = await graphviz.dot(dot);
-			setSvg(svg);
-		}
+			try {
+				const graphviz = await Graphviz.load();
+				const svg = await graphviz.dot(dot);
+				setSvg(svg);
+			} catch(error){
+				console.log("error=" + error);
+				setSvg(`<svg height="30" width="200">
+				<text x="0" y="15" fill="red">${error}</text>
+			  </svg>`);
+			}
+		}	
 		getSvg();
 	}, [dot]);
 
 	return (
 		<div>
-			<TransformWrapper maxScale={32}>
+			<TransformWrapper maxScale={100}>
 				<TransformComponent>
 					<SVG
 						innerRef={svgRef}

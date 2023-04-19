@@ -14,6 +14,9 @@ export function RenderGraphViz(settings, tableMetaDatas) {
 	let source = 'digraph {\n\t'
 	source += 'bgcolor=transparent\n\t';
 	source += 'pad=0.25\n\t';
+	source += `layout=${settings.layoutEngine}\n\t`;
+	source += 'defaultdist="4"\n\t';
+	source += 'concentrate=true\n\t';
 	source += 'nodesep=0.75\n\t';
 
 	if (chartOrientation != ChartOrientation.HORIZONTAL) {
@@ -161,6 +164,11 @@ function createANodeFromAView(tableSettings, displayedRecords, nodeMap, edges, r
 	if (record.name.length > 50) {
 		displayText += '...';
 	}
+	displayText = escapeHtml(displayText);
+	
+	if(displayText == ""){
+		displayText = " ";
+	}
 
 	let nodeDetails = `<<table border="0" cellborder="1" cellspacing="0" cellpadding="4"> <tr> <td> <b>${displayText}</b></td></tr>  <tr><td><table border="0" cellborder="0" cellspacing="0" >\n`
 
@@ -216,7 +224,6 @@ function createANodeFromAView(tableSettings, displayedRecords, nodeMap, edges, r
 			}
 			return false;
 		});
-		console.log("toEmbedRecords=" + toEmbedRecords);
 
 		for (let embedRecord of toEmbedRecords) {
 			let rowValueAsString = embedRecord.name;
@@ -234,8 +241,6 @@ function createANodeFromAView(tableSettings, displayedRecords, nodeMap, edges, r
 			for (let fieldMetaData of Object.values(tableMetaDataB)) {
 				if (fieldMetaData.fieldType == "multipleRecordLinks" && fieldMetaData.embedField == false) {
 					let cellValue = embedRecord.getCellValue(fieldMetaData.fieldName);
-
-					//nodeDetails += `<tr> <td port="${fieldMetaData.fieldId}" align="left" >${fieldMetaData.fieldName} : ${cleanCellValueAsString}</td> </tr>`;
 
 					if (cellValue != null && includedTables.has(fieldMetaData.linkedTableId)) {
 						cellValue.forEach(item => {

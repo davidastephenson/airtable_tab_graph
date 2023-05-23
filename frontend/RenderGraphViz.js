@@ -277,8 +277,8 @@ function createANodeFromAView(tableSettings, displayedRecords, nodeMap, edges, r
 	if (tableSettings.tableXShapeAs === ShapeAs.FIXEDSHAPE) {
 		theShape = tableSettings.tableXShape;
 	} else {
-		if (tableSettings.tableXfield != null) {
-			theShape = record.getCellValueAsString(tableSettings.tableXfield);
+		if (tableSettings.tableXFieldShape != null) {
+			theShape = record.getCellValueAsString(tableSettings.tableXFieldShape);
 		} else {
 			theShape = "rect";
 		}

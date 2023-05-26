@@ -3,19 +3,21 @@
 Visualize linked records as graph, such as a flowchart, decision tree, or user flow diagram. Export your
 graph to SVG for further editing or PNG for sharing.
 
+![example output](assets/example1.png)
+
 # Example usage
 
 **single table display** an example of displaying a single table as shapes.
 
-![ingle table display](assets/BasicRegions.mp4)
+![ingle table display](assets/BasicRegions.gif)
 
 **mutiple table display** an example of displaying three tables with an embedded link table.
 
-![mutiple table display](assets/ContientRegionCountryBorder.mp4)
+![mutiple table display](assets/ContientRegionCountryBorder.gif)
 
 **row edit** you can click on any shape and edit the row for that table.
 
-![Row Edit](assets/RowEdit.mp4)
+![Row Edit](assets/RowEdit.gif)
 
 # Settings
 ## Common
@@ -28,7 +30,7 @@ graph to SVG for further editing or PNG for sharing.
 
 **layout engine** - try out different GraphViz [layout engines](https://graphviz.org/docs/layouts/) 
 
-## Tab X
+## Tabs 1-3
 
 You can configure beteween 1 and 3 tabs to be displayed as nodes on a canvas. Each tab has the same options:
 
@@ -63,9 +65,11 @@ You can export the current chart canvas view as either a .png or .svg files.
 
 ## How to remix this app
 
-1. Create a new base (or you can use an existing base).
+1. Download the source from [Git](https://github.com/davidastephenson/airtable_tab_graph) 
 
-2. Create a new app in your base (see [Create a new app](https://airtable.com/developers/blocks/guides/hello-world-tutorial#create-a-new-app)),
+2. Create a new base (or you can use an existing base).
+
+3. Create a new app in your base (see [Create a new app](https://airtable.com/developers/blocks/guides/hello-world-tutorial#create-a-new-app)),
    selecting "Remix from Github" as your template.
 
-3. From the root of your new app, run `block run`.
+4. From the root of your new app, run `block run`.

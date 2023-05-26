@@ -180,7 +180,9 @@ function TabGraphApp() {
 				onClick={_onGraphClick}
 			>
 				<GraphVizWrapper dot={dot} subtractWidth={isSettingsVisible ? 350 : 0} svgRef={svgRef}>
-					<span className="prompt">{spantext}</span>
+					<svg height="30" width="200">
+						<text x="0" y="15" fill="red">{spantext}</text>
+					</svg>
 				</GraphVizWrapper>
 			</div>
 			{isSettingsVisible && settings.canUpdateGlobalConfig && (

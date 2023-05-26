@@ -4,6 +4,7 @@ import { useGlobalConfig } from '@airtable/blocks/ui';
 export const ConfigKeys = {
 	CHART_ORIENTATION: 'chartOrientation',
 	LINK_STYLE: 'linkStyle',
+	LAYOUT_ENGINE:  'layoutEngine',
 
 	TABLE1_ID: 'table1Id',
 	VIEW1_ID: 'view1Id',
@@ -47,10 +48,73 @@ export const ConfigKeys = {
 
 export const RecordShape = Object.freeze({
 	RECTANGLE: 'rectangle',
+	SQUARE: 'square',
+	STAR: 'star',
+	CYLINDER: 'cylinder',
+	POLYGON: 'polygon',
 	ELLIPSE: 'ellipse',
+	OVAL: 'oval',
 	CIRCLE: 'circle',
+	EGG: 'egg',
 	DIAMOND: 'diamond',
+	TRAPEZIUM: 'trapezium',
+	PARALLELOGRAM: 'parallelogram',
+	HOUSE: 'house',
+	NOTE: 'note',
+	TAB: 'tab',
+	FOLDER: 'folder',
+	BOX3D: 'box3d',
+	COMPONENT: 'component',
+	PENTAGON: 'pentagon',
+	HEXAGON: 'hexagon',
+	SEPTAGON: 'septagon',
+	OCTAGON: 'octagon',
+	DOUBLECIRCLE: 'doublecircle',
+	DOUBLEOCTAGON: 'doubleoctagon',
+	TRIPLEOCTAGON: 'tripleoctagon',
+	INVTRIANGLE: 'invtriangle',
+	INVTRAPEZIUM: 'invtrapezium',
+	INVHOUSE: 'invhouse',
+	MDIAMOND: 'Mdiamond',
+	MSQUARE: 'Msquare',
+	MCIRCLE: 'Mcircle',
+	CDS: 'cds',
 });
+
+export const  RecordShapeOptions = [
+	{ label: 'rectangle', value: RecordShape.RECTANGLE },
+	{ label: 'polygon', value: RecordShape.POLYGON },
+	{ label: 'ellipse', value: RecordShape.ELLIPSE },
+	{ label: 'oval', value: RecordShape.OVAL },
+	{ label: 'circle', value: RecordShape.CIRCLE },
+	{ label: 'egg', value: RecordShape.EGG },
+	{ label: 'diamond', value: RecordShape.DIAMOND },
+	{ label: 'trapezium', value: RecordShape.TRAPEZIUM },
+	{ label: 'parallelogram', value: RecordShape.PARALLELOGRAM },
+	{ label: 'house', value: RecordShape.HOUSE },
+	{ label: 'pentagon', value: RecordShape.PENTAGON },
+	{ label: 'hexagon', value: RecordShape.HEXAGON },
+	{ label: 'septagon', value: RecordShape.SEPTAGON },
+	{ label: 'octagon', value: RecordShape.OCTAGON },
+	{ label: 'invhouse', value: RecordShape.INVHOUSE },
+	{ label: 'Mdiamond', value: RecordShape.MDIAMOND },
+	{ label: 'Msquare', value: RecordShape.MSQUARE },
+	{ label: 'Mcircle', value: RecordShape.MCIRCLE },
+	{ label: 'square', value: RecordShape.SQUARE },
+	{ label: 'star', value: RecordShape.STAR },
+	{ label: 'cylinder', value: RecordShape.CYLINDER },
+	{ label: 'note', value: RecordShape.NOTE },
+	{ label: 'tab', value: RecordShape.TAB },
+	{ label: 'folder', value: RecordShape.FOLDER },
+	{ label: 'box3d', value: RecordShape.BOX3D },
+	{ label: 'component', value: RecordShape.COMPONENT },
+	{ label: 'doublecircle', value: RecordShape.DOUBLECIRCLE },
+	{ label: 'doubleoctagon', value: RecordShape.DOUBLEOCTAGON },
+	{ label: 'tripleoctagon', value: RecordShape.TRIPLEOCTAGON },
+	{ label: 'invtriangle', value: RecordShape.INVTRIANGLE },
+	{ label: 'invtrapezium', value: RecordShape.INVTRAPEZIUM },
+	{ label: 'cds', value: RecordShape.CDS },
+]
 
 export const LinkStyle = Object.freeze({
 	RIGHT_ANGLES: 'rightAngles',
@@ -61,6 +125,17 @@ export const LinkStyle = Object.freeze({
 export const ChartOrientation = Object.freeze({
 	HORIZONTAL: 'horizontal',
 	VERTICAL: 'vertical',
+});
+
+export const LayoutEngine = Object.freeze({
+	DOT: 'dot',
+	NEATO: 'neato',
+	FDP: 'fdp',
+	SFDP: 'sfdp',
+	CIRCO: 'circo',
+	TWOPI: 'twopi',
+	OSAGE: 'osage',
+	PATCHWORK: 'patchwork'
 });
 
 export const ColourBy = Object.freeze({
@@ -76,6 +151,7 @@ export const ShapeAs = Object.freeze({
 const defaults = Object.freeze({
 	[ConfigKeys.CHART_ORIENTATION]: ChartOrientation.VERTICAL,
 	[ConfigKeys.LINK_STYLE]: LinkStyle.RIGHT_ANGLES,
+	[ConfigKeys.LAYOUT_ENGINE]: LayoutEngine.DOT,
 
 	[ConfigKeys.TABLE1_SHAPE_AS]: ShapeAs.FIXEDSHAPE,
 	[ConfigKeys.TABLE1_SHAPE]: RecordShape.RECTANGLE,
@@ -198,6 +274,7 @@ function getSettings(rawSettings, base, globalConfig) {
 
 		chartOrientation: rawSettings.chartOrientation,
 		linkStyle: rawSettings.linkStyle,
+		layoutEngine : rawSettings.layoutEngine,
 
 		table1ShapeAs: rawSettings.table1ShapeAs,
 		table1Shape: rawSettings.table1Shape,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Button, FieldPickerSynced, FormField, Heading, Label, Link, InputSynced, SelectButtonsSynced, SelectSynced, TablePickerSynced, Text, SwitchSynced, ViewPickerSynced } from '@airtable/blocks/ui';
 import { ExportType } from './index';
-import { NodeShapeAllowedFieldTypes, ClusterByAllowedFieldTypes, LinkFieldTypes, ConfigKeys, LinkStyle, ChartOrientation, RecordShape, ShapeAs, ColourBy } from './settings';
+import { NodeShapeAllowedFieldTypes, LayoutEngine, ClusterByAllowedFieldTypes, LinkFieldTypes, ConfigKeys, LinkStyle, ChartOrientation, RecordShape, RecordShapeOptions, ShapeAs, ColourBy } from './settings';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { globalConfig } from '@airtable/blocks';
@@ -95,6 +95,21 @@ function SettingsForm({ setIsSettingsVisible, settingsValidationResult, onExport
 							globalConfigKey={ConfigKeys.LINK_STYLE}
 						/>
 					</FormField>
+					<FormField label="Layout Engine">
+						<SelectSynced
+							options={[
+								{ label: 'dot - hierarchical or layered drawings of directed graphs.', value: LayoutEngine.DOT },
+								{ label: 'neato - "spring model" layouts.', value: LayoutEngine.NEATO },
+								{ label: 'fdp - stands for Force-Directed Placement.', value: LayoutEngine.FDP },
+								{ label: 'sfdp - stands for Scalable Force-Directed Placement.', value: LayoutEngine.SFDP },
+								{ label: 'circo - circular layout.', value: LayoutEngine.CIRCO },
+								{ label: 'twopi - radial layout.', value: LayoutEngine.TWOPI },
+								{ label: 'osage - draws clustered graphs.', value: LayoutEngine.OSAGE },
+								{ label: 'patchwork - draws map of clustered graph using a squarified treemap layout.', value: LayoutEngine.PATCHWORK }
+							]}
+							globalConfigKey={ConfigKeys.LAYOUT_ENGINE}
+						/>
+					</FormField>
 				</TabPanel>
 				<TabPanel>
 					<Box
@@ -128,13 +143,7 @@ function SettingsForm({ setIsSettingsVisible, settingsValidationResult, onExport
 								{settings.table1ShapeAs === ShapeAs.FIXEDSHAPE &&
 									<FormField label="Table 1 Shape">
 										<SelectSynced
-											options={[
-												{ label: 'Pick a shape...', value: null, disabled: true },
-												{ label: 'Rectangle', value: RecordShape.RECTANGLE },
-												{ label: 'Ellipse', value: RecordShape.ELLIPSE },
-												{ label: 'Circle', value: RecordShape.CIRCLE },
-												{ label: 'Diamond', value: RecordShape.DIAMOND },
-											]}
+											options={RecordShapeOptions}
 											globalConfigKey={ConfigKeys.TABLE1_SHAPE}
 										/>
 									</FormField>}
@@ -149,7 +158,7 @@ function SettingsForm({ setIsSettingsVisible, settingsValidationResult, onExport
 											allowedTypes={NodeShapeAllowedFieldTypes}
 										/>
 									</FormField>}
-								<FormField label="Table1 Shape Rounded">
+								<FormField label="Table 1 Shape Rounded">
 									<SwitchSynced
 										label={`Shapes are ${settings.table1Rounded ? "" : "not "}rounded`}
 										globalConfigKey={ConfigKeys.TABLE1_SHAPE_ROUNDED}
@@ -183,7 +192,7 @@ function SettingsForm({ setIsSettingsVisible, settingsValidationResult, onExport
 											globalConfigKey={ConfigKeys.TABLE1_COLOUR}
 										/>
 									</FormField>}
-								<FormField label="Table1 Include Fields">
+								<FormField label="Table 1 Include Fields">
 									<SwitchSynced
 										label="View fields in grid"
 										value={settings.table1IncludeFields}
@@ -278,7 +287,7 @@ function SettingsForm({ setIsSettingsVisible, settingsValidationResult, onExport
 										allowedTypes={NodeShapeAllowedFieldTypes}
 									/>
 								</FormField>}
-							<FormField label="Table2 Shape Rounded">
+							<FormField label="Table 2 Shape Rounded">
 								<SwitchSynced
 									label={`Shapes are ${settings.table2Rounded ? "" : "not "}rounded`}
 									value={settings.table2Rounded}
@@ -313,7 +322,7 @@ function SettingsForm({ setIsSettingsVisible, settingsValidationResult, onExport
 										globalConfigKey={ConfigKeys.TABLE2_COLOUR}
 									/>
 								</FormField>}
-							<FormField label="Table2 Include Fields">
+							<FormField label="Table 2 Include Fields">
 								<SwitchSynced
 									label="View fields in grid"
 									value={settings.table2IncludeFields}

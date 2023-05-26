@@ -156,7 +156,6 @@ function createANodeFromAView(tableSettings, displayedRecords, nodeMap, edges, r
 		shouldUseLightText = colorUtils.shouldUseLightTextOnColor(recordColor);
 	}
 
-
 	let displayText = record.name
 		.substring(0, 50)
 		.trim()

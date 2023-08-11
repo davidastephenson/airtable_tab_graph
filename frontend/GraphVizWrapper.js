@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Graphviz } from "@hpcc-js/wasm/graphviz";
+import Viz from 'viz.js';
+import { Module, render } from 'viz.js/full.render.js';	
 import SVG from "react-inlinesvg";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { useWindowSize } from "@react-hook/window-size";
@@ -12,11 +13,19 @@ export default ({ dot, subtractWidth, svgRef, children }) => {
 	const [svg, setSvg] = useState("");
 
 	useEffect(() => {
-		async function getSvg() {
+		async function getSvg() { 
 			try {
-				const graphviz = await Graphviz.load();
-				const svg = await graphviz.dot(dot);
-				setSvg(svg);
+				if((typeof dot) == "string"){
+					var viz = new Viz({ Module, render });
+					viz.renderString(dot).then(function(s) {
+					  console.log(s);
+					  setSvg(s);
+					});
+				} else { 
+					setSvg(`<svg height="30" width="200">
+						<text x="0" y="15" fill="red">loading...</text>
+					</svg>`);
+				}
 			} catch(error){
 				console.log("error=" + error);
 				setSvg(`<svg height="30" width="200">

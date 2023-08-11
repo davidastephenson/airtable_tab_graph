@@ -5,6 +5,8 @@ graph to SVG for further editing or PNG for sharing.
 
 ![example output](assets/example1.png)
 
+Display your airtable data as nodes on a canvas, with links between your nodes being displayed as lines between the shapes. Data from multiple tabs can be displayed on the same canvas. The shape displayed and its colour can either be fixed or driven from field information. You can restrict which nodes and links are displayed by creating Airtable views. You can click on any node on the canvas and open the row edit dialogue. You can choose between several GraphViz layout engines to get different output effects and styles that meet your needs.
+
 # Example usage
 
 **single table display** an example of displaying a single table as shapes.
